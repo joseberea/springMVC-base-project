@@ -41,7 +41,7 @@
 	<bean id="mapperPersistencia" class="org.dozer.DozerBeanMapper">
 		<property name="mappingFiles">
 			<list>
-				<value>classpath*:config/dozer/dozer-bean-mappings.xml</value>
+				<value>config/dozer/dozer-bean-mappings.xml</value>
 			</list>
 		</property>
 	</bean>

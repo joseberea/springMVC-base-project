@@ -28,7 +28,7 @@ public class HibernateDummyDao extends HibernateBaseDao<Dummy, DummyVO> implemen
 		
 		Root<Dummy> root = criteria.from( Dummy.class );
 		criteria.select( root );
-		//criteria.where( builder.equal( root.get( "description" ), "dummy1" ) );
+		criteria.where( builder.equal( root.get( "description" ), "dummy1" ) );
 
 		List<Dummy> l = entityManager.createQuery( criteria ).getResultList();
 		
