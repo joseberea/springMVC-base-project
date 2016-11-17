@@ -9,7 +9,7 @@
 	</definition>
 	
 	<!-- Home -->
-	<definition name="home" extends="base.layout">
-		<put-attribute name="body" value="/WEB-INF/jsp/home.jsp" />
+	<definition name="dummy" extends="base.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/dummy.jsp" />
 	</definition>
 </tiles-definitions>
