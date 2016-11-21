@@ -1,60 +1,33 @@
 package es.jmberea.dao.hibernate;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+/**
+ * Interface dao base Hibernate 4 de la capa de persistencia.
+ *
+ * @author  SIGE
+ * @version 1.0.0
+ */
+public interface HibernateBaseDao<ENTITY, VO> {
 
-import org.dozer.DozerBeanMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+	public List<VO> selectAll() throws Exception;
+	
+	public List<VO> selectAll(String sortFieldName, boolean asc) throws Exception;
+	
+	public VO selectById(Serializable id) throws Exception;
+	
+	public List<VO> selectByField(String field, String fieldValue) throws Exception;
 
-public class HibernateBaseDao<ENTITY, VO> {
+	public VO insert(VO vo) throws Exception;
+	
+	public List<VO> insert(List<VO> vos) throws Exception;
+	
+	public void update(VO vo) throws Exception;
 
-	@PersistenceContext
-    protected EntityManager entityManager;
-
-	@Autowired
-	DozerBeanMapper mapperPersistencia;
-
-	private Class<VO> voClass;
-
-	private Class<ENTITY> entityClass;
-
-	public HibernateBaseDao(Class<ENTITY> entityClass, Class<VO> voClass) {
-		this.voClass = voClass;
-		this.entityClass = entityClass;
-	}
-
-	protected VO toVO(ENTITY entity) {
-		return mapperPersistencia.map(entity, voClass);
-	}
-
-	protected List<VO> toVO(List<ENTITY> entities) throws Exception {
-		List<VO> vos = null;
-
-		if (entities != null) {
-			vos = new ArrayList<VO>();
-			for (ENTITY entity : entities)
-				vos.add(toVO(entity));
-		}
-
-		return vos;
-	}
-
-	protected ENTITY toENTITY(VO vo) {
-		return mapperPersistencia.map(vo, entityClass);
-	}
-
-	protected List<ENTITY> toENTITY(List<VO> vos) throws Exception {
-		List<ENTITY> entities = null;
-
-		if (vos != null) {
-			entities = new ArrayList<ENTITY>();
-			for (VO vo : vos)
-				entities.add(toENTITY(vo));
-		}
-
-		return entities;
-	}
+	public void delete(VO vo) throws Exception;
+	
+	public void deleteById(Serializable id) throws Exception;
+	
+	public int delete(List<VO> vos) throws Exception;
 }

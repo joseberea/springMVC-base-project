@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <!-- <PatternLayout pattern="[%-5level] [%t] %d{yyyy-MM-dd HH:mm:ss.SSS}: %msg%n"/> -->
+            <PatternLayout pattern="[%-5level]: [%X{sessionId}] %m%n"/>
+        </Console>
+        <File name="file" fileName="dummy.log">
+        	<PatternLayout pattern="%d{dd/MM/yyyy} %X{sessionId} %m%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="info" additivity="false">
+            <AppenderRef ref="console"/>
+        </Root>   
+		 <Logger name="es.jmberea" level="debug" additivity="false">
+			<AppenderRef ref="console" level="info" />
+			<AppenderRef ref="file"/>
+	    </Logger>          
+    </Loggers>
+</Configuration>
