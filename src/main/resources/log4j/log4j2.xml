@@ -1,22 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<Configuration status="WARN">
-    <Appenders>
-        <Console name="console" target="SYSTEM_OUT">
-            <!-- <PatternLayout pattern="[%-5level] [%t] %d{yyyy-MM-dd HH:mm:ss.SSS}: %msg%n"/> -->
-            <PatternLayout pattern="[%-5level]: [%X{sessionId}] %m%n"/>
-        </Console>
-        <File name="file" fileName="dummy.log">
-        	<PatternLayout pattern="%d{dd/MM/yyyy} %X{sessionId} %m%n"/>
-        </File>
-    </Appenders>
-    <Loggers>
-        <Root level="info" additivity="false">
-            <AppenderRef ref="console"/>
-        </Root>   
-		 <Logger name="es.jmberea" level="debug" additivity="false">
+<Configuration>
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<!-- <PatternLayout pattern="[%-5level] [%t] %d{yyyy-MM-dd HH:mm:ss.SSS}: 
+				%msg%n"/> -->
+			<PatternLayout pattern="%d{dd/MM/yyyy} [%-5level][%X{sessionId}]: %C | %m%n" />
+		</Console>
+		<File name="file" fileName="C:\Users\48970544w\Desktop\dummy.log">
+			<PatternLayout pattern="%d{dd/MM/yyyy} [%-5level][%X{sessionId}]: %C | %m%n" />
+		</File>
+	</Appenders>
+	<Loggers>
+		<Root level="info" additivity="false">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="file" level="info" />
+		</Root>
+		<Logger name="es.jmberea" additivity="false">
 			<AppenderRef ref="console" level="info" />
-			<AppenderRef ref="file"/>
-	    </Logger>          
-    </Loggers>
+			<AppenderRef ref="file" level="info" />
+		</Logger>
+		<Logger name="org.dozer" additivity="false">
+			<AppenderRef ref="console" level="warn" />
+			<AppenderRef ref="file" level="warn" />
+		</Logger>
+		<Logger name="org.springframework" additivity="false">
+			<AppenderRef ref="console" level="warn" />
+			<AppenderRef ref="file" level="warn" />
+		</Logger>
+		<Logger name="org.apache.tiles" additivity="false">
+			<AppenderRef ref="console" level="warn" />
+			<AppenderRef ref="file" level="warn" />
+		</Logger>		
+		<Logger name="org.hibernate" additivity="true">
+			<AppenderRef ref="console" level="error" />
+			<AppenderRef ref="file" level="error" />
+		</Logger>
+		<Logger name="org.hibernate.SQL" additivity="true">
+			<AppenderRef ref="console" level="debug" />
+			<AppenderRef ref="file" level="debug" />
+		</Logger>		
+	</Loggers>
 </Configuration>
