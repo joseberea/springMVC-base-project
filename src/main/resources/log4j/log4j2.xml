@@ -3,11 +3,18 @@
 <Configuration>
 	<Appenders>
 		<Console name="console" target="SYSTEM_OUT">
-			<!-- <PatternLayout pattern="[%-5level] [%t] %d{yyyy-MM-dd HH:mm:ss.SSS}: 
-				%msg%n"/> -->
 			<PatternLayout pattern="%d{dd/MM/yyyy} [%-5level][%X{sessionId}]: %C | %m%n" />
 		</Console>
-		<File name="file" fileName="C:\Users\48970544w\Desktop\dummy.log">
+		<RollingFile name="rollingFile" fileName="c:/personalLogs/rollingDummy.log"
+			filePattern="/logs/rollingDummy-%d{yyyyMMdd}-%i.log">
+			<PatternLayout pattern="%d{dd/MM/yyyy} [%-5level][%X{sessionId}]: %C | %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="2000" />
+		</RollingFile>
+		<File name="file" fileName="c:/personalLogs/dummy.log">
 			<PatternLayout pattern="%d{dd/MM/yyyy} [%-5level][%X{sessionId}]: %C | %m%n" />
 		</File>
 	</Appenders>
@@ -15,30 +22,37 @@
 		<Root level="info" additivity="false">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="file" level="info" />
+			<AppenderRef ref="rollingFile" level="info" />
 		</Root>
 		<Logger name="es.jmberea" additivity="false">
 			<AppenderRef ref="console" level="info" />
 			<AppenderRef ref="file" level="info" />
+			<AppenderRef ref="rollingFile" level="info" />
 		</Logger>
 		<Logger name="org.dozer" additivity="false">
 			<AppenderRef ref="console" level="warn" />
 			<AppenderRef ref="file" level="warn" />
+			<AppenderRef ref="rollingFile" level="warn" />
 		</Logger>
 		<Logger name="org.springframework" additivity="false">
 			<AppenderRef ref="console" level="warn" />
 			<AppenderRef ref="file" level="warn" />
+			<AppenderRef ref="rollingFile" level="warn" />
 		</Logger>
 		<Logger name="org.apache.tiles" additivity="false">
 			<AppenderRef ref="console" level="warn" />
 			<AppenderRef ref="file" level="warn" />
-		</Logger>		
+			<AppenderRef ref="rollingFile" level="warn" />
+		</Logger>
 		<Logger name="org.hibernate" additivity="true">
 			<AppenderRef ref="console" level="error" />
 			<AppenderRef ref="file" level="error" />
+			<AppenderRef ref="rollingFile" level="error" />
 		</Logger>
 		<Logger name="org.hibernate.SQL" additivity="true">
 			<AppenderRef ref="console" level="debug" />
 			<AppenderRef ref="file" level="debug" />
-		</Logger>		
+			<AppenderRef ref="rollingFile" level="debug" />
+		</Logger>
 	</Loggers>
 </Configuration>
