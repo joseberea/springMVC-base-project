@@ -24,10 +24,7 @@ public class DummyController {
 
 	@RequestMapping(value = "/")
 	public String homeHandler(HttpServletRequest request) throws ServiceException {
-		//ThreadContext.put("sessionId", request.getSession().getId());
-		//MDC.put("sessionId", request.getSession().getId());
 		List<DummyVO> list = dummyService.getAll();
-		// DummyVO vo = dummyService.getById(null);
 		logger.info("ELEMENTOS: " + list.size());
 		return "dummy";
 	}
